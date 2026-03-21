@@ -36,7 +36,7 @@ contract SendSomeEther {
         _;
     }
 
-    constructor(string memory _name, string memory _symbol, uint256 _initialSupply) checkAmount(s_initialSupply) {
+    constructor(string memory _name, string memory _symbol, uint256 _initialSupply) checkAmount(_initialSupply) {
         s_owner = msg.sender;
         s_name = _name;
         s_symbol = _symbol;
