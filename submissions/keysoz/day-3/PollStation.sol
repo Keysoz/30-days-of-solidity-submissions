@@ -79,6 +79,10 @@ contract PollStation {
     }
 
     function addCandidate(string memory _candidate) external onlyOwner {
+        bytes32 candidateHash = keccak256(bytes(_candidate));
+        for (uint256 i = 0; i < candidates.length; i++) {
+            require(keccak256(bytes(candidates[i].name)) != candidateHash, "Candidate already exists");
+        }
         candidates.push(Candidate(_candidate, 0));
     }
 }
