@@ -122,7 +122,7 @@ contract Bank {
     }
 
     function getTotalBalance() public view onlyOwner returns (uint256) {
-        return s_totalBankBalance;
+        return address(this).balance;
     }
 
     function getBalance(address user) public view returns (uint256) {
