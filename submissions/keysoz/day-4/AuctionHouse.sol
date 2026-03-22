@@ -63,7 +63,7 @@ contract AuctionHouse {
     }
 
     constructor(uint256 _initialFee) {
-        i_owner = msg.sender;
+        require(_initialFee <= 100, "fee must be <= 100");
         i_contractFee = _initialFee;
     }
 
