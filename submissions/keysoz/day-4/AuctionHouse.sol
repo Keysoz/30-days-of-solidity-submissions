@@ -161,8 +161,7 @@ contract AuctionHouse {
         uint256 amount = highestOffer[_index] - fee;
         items[_index].owner = winner[_index];
         emit AuctionEnded(_index, winner[_index], highestOffer[_index]);
-        (bool success,) = payable(auctionOwner).call{value: amount}("");
-        if (!success) revert AuctionHouse__WithdrawError();
+        addressToBid[_index][auctionOwner] += amount;
     }
 
     function WithdrawContractFees() external {
