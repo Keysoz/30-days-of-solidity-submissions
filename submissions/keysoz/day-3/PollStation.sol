@@ -83,5 +83,5 @@ contract PollStation {
         for (uint256 i = 0; i < candidates.length; i++) {
             require(keccak256(bytes(candidates[i].name)) != candidateHash, "Candidate already exists");
         }
-    }
+        candidates.push(Candidate({name: _candidate, votes: 0}));
 }
