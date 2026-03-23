@@ -12,7 +12,7 @@ error TipJar__NonExistedCurrency(string currencyCode);
 
 contract TipJar {
     address private s_owner;
-    uint256 private ethTotalTips;
+    uint256 private ethTipsCounter;
     uint256 private totalTipsCounter;
     address[] private contributors;
     string[] private supportedCurrencies;
@@ -86,7 +86,7 @@ contract TipJar {
             contributors.push(sender);
             isContributor[sender] = true;
         }
-        ethTotalTips += amount;
+        ethTipsCounter++;
         totalTipsCounter++;
         tippingContributor[sender] += amount;
         emit TipReceived(sender, amount, "ETH");
@@ -100,7 +100,7 @@ contract TipJar {
     {
         address sender = msg.sender;
         uint256 amountInEth = convertToEth(amount, currencyCode);
-        if (msg.value < amountInEth) revert TipJar__InsufficientETH(msg.value, amountInEth);
+        if (msg.value != amountInEth) revert TipJar__InsufficientETH(msg.value, amountInEth);
         if (!isContributor[sender]) {
             contributors.push(sender);
             isContributor[sender] = true;
